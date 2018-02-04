@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    
+    // Link Parse to heroku server
+    Parse.initialize(
+      with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
+        configuration.applicationId = "Instagram"
+        configuration.clientKey = "eq78nfh8hiehwihqfniy"  // set to nil assuming you have not set clientKey
+        configuration.server = "https://fathomless-dawn-95069.herokuapp.com/parse"
+      })
+    )
+    
+    // Check if a user was already logged in
+    if let currentUser = PFUser.current() {
+      print("Welcome back \(currentUser.username!) 😀")
+        
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let chatViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController")
+      window?.rootViewController = chatViewController
+      
+    }
+    
+    // Add logout observer
+    NotificationCenter.default.addObserver(forName: Notification.Name("didLogout"), object: nil, queue: OperationQueue.main) { (Notification) in
+      print("Logout notification received")
+      self.logOut()
+    }
+    
     return true
   }
 
@@ -39,6 +65,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+  }
+  
+  func logOut() {
+    
+    // Logout the current user
+    PFUser.logOutInBackground(block: { (error) in
+      if let error = error {
+        print(error.localizedDescription)
+      } else {
+        print("Successful loggout")
+        // Load and show the login view controller
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        self.window?.rootViewController = loginViewController
+      }
+    })
   }
 
 

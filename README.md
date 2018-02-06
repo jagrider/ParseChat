@@ -2,7 +2,7 @@
 
 **ParseChat** is a Chat app using an [open source Parse](http://parseplatform.org/) backend.
 
-Time spent: **X** hours spent in total
+Time spent: **8** hours spent in total
 
 ## User Stories
 
@@ -29,7 +29,6 @@ The following **additional** user stories are implemented:
 - [x] User can log out of his or her account. (+1-3pts)
 - [x] Added app icon (+1-3pts)
 - [x] Added custom launch screen (+1-3pts)
-- [x] User is notified when username / password is too long on login screen (+1-3pts)
 - [x] Auto layout to work in landscape and portrait mode on iPhone 6 and newer (+1-3pts)
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
@@ -41,7 +40,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='ParseChat_Demo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
